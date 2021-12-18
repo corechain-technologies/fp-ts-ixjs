@@ -1,10 +1,14 @@
 const path = require('path')
 
 module.exports = {
-  extends: [
-    'werk85/modern'
-  ],
+  extends: "plugin:fp-ts/all",
+  plugins: ["@typescript-eslint", "fp-ts"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: path.join(__dirname, './tsconfig.json')
-  }
-}
+    tsconfigRootDir: __dirname,
+    project: ["./tsconfig.json"],
+  },
+  rules: {
+    "fp-ts/no-pipeable": "warn"
+  },
+};

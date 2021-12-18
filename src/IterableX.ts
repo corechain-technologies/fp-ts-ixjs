@@ -3,14 +3,12 @@
  */
 import { IterableX, empty, concat, of as ixOf } from 'ix/iterable'
 import { map as ixMap, flatMap } from 'ix/iterable/operators'
-import { Monoid } from 'fp-ts/lib/Monoid'
-import { Alternative1 } from 'fp-ts/lib/Alternative'
-import { Filterable1 } from 'fp-ts/lib/Filterable'
-import { Monad1 } from 'fp-ts/lib/Monad'
-import { identity, Predicate } from 'fp-ts/lib/function'
-import { pipe, pipeable } from 'fp-ts/lib/pipeable'
-import * as E from 'fp-ts/lib/Either'
-import * as O from 'fp-ts/lib/Option'
+import { identity, Predicate } from 'fp-ts/function'
+import { pipe } from 'fp-ts/function'
+import { pipeable } from "fp-ts/pipeable";
+import * as E from 'fp-ts/Either'
+import * as O from 'fp-ts/Option'
+import { monoid, alternative, filterable, monad } from 'fp-ts'
 
 declare module 'fp-ts/lib/HKT' {
   interface URItoKind<A> {
@@ -31,7 +29,7 @@ export type URI = typeof URI
 /**
  * @since 0.0.1
  */
-export function getMonoid<A = never>(): Monoid<IterableX<A>> {
+export function getMonoid<A = never>(): monoid.Monoid<IterableX<A>> {
   return {
     concat: (x, y) => concat(x, y),
     empty: empty()
@@ -41,7 +39,7 @@ export function getMonoid<A = never>(): Monoid<IterableX<A>> {
 /**
  * @since 0.0.1
  */
-export const iterable: Monad1<URI> & Alternative1<URI> & Filterable1<URI> = {
+export const iterable: monad.Monad1<URI> & alternative.Alternative1<URI> & filterable.Filterable1<URI> = {
   URI,
   map: (fa, f) => pipe(fa, ixMap(f)),
   of: ixOf,

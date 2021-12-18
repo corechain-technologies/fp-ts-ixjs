@@ -3,15 +3,13 @@
  */
 import { AsyncIterableX, merge, empty, combineLatest, of as ixOf } from 'ix/asynciterable'
 import { map as ixMap, flatMap, catchError } from 'ix/asynciterable/operators'
-import { Monoid } from 'fp-ts/lib/Monoid'
-import { Alternative1 } from 'fp-ts/lib/Alternative'
-import { Filterable1 } from 'fp-ts/lib/Filterable'
-import { Monad1 } from 'fp-ts/lib/Monad'
-import { identity, Predicate } from 'fp-ts/lib/function'
-import { pipe, pipeable } from 'fp-ts/lib/pipeable'
-import * as E from 'fp-ts/lib/Either'
-import * as O from 'fp-ts/lib/Option'
+import { identity, Predicate } from 'fp-ts/function'
+import { pipe } from 'fp-ts/function'
+import { pipeable } from "fp-ts/pipeable";
+import * as E from 'fp-ts/Either'
+import * as O from 'fp-ts/Option'
 import { fromNodeStream as ixFromNodeStream } from 'ix/asynciterable/fromnodestream'
+import { monoid, alternative, filterable, monad } from 'fp-ts'
 
 declare module 'fp-ts/lib/HKT' {
   interface URItoKind<A> {
@@ -32,7 +30,7 @@ export type URI = typeof URI
 /**
  * @since 0.0.1
  */
-export function getMonoid<A = never>(): Monoid<AsyncIterableX<A>> {
+export function getMonoid<A = never>(): monoid.Monoid<AsyncIterableX<A>> {
   return {
     concat: (x, y) => merge(x, y),
     empty: empty()
@@ -42,7 +40,7 @@ export function getMonoid<A = never>(): Monoid<AsyncIterableX<A>> {
 /**
  * @since 0.0.1
  */
-export const asyncIterable: Monad1<URI> & Alternative1<URI> & Filterable1<URI> = {
+export const asyncIterable: monad.Monad1<URI> & alternative.Alternative1<URI> & filterable.Filterable1<URI> = {
   URI,
   map: (fa, f) => pipe(fa, ixMap(f)),
   of: a => ixOf(a),

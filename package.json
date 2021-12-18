@@ -11,12 +11,12 @@
     "lint:es": "eslint --ext .ts,.tsx .",
     "lint:tsc": "tsc --project ./tsconfig.json --noEmit && tsc --project ./test/tsconfig.json --noEmit",
     "lint:fix": "eslint --ext .ts,.tsx --fix .",
-    "lint": "yarn lint:es && yarn lint:tsc",
+    "lint": "run-s lint:es lint:tsc",
     "jest": "jest --ci",
-    "test": "yarn lint && yarn jest && yarn docs",
+    "test": "run-s lint jest docs",
     "clean": "rm -rf lib/*",
-    "build": "yarn clean && tsc",
-    "prepublish": "yarn build",
+    "build": "run-s clean && tsc",
+    "prepublish": "run-s build",
     "docs": "docs-ts"
   },
   "repository": {
@@ -34,15 +34,20 @@
     "ix": "^3.0.0"
   },
   "devDependencies": {
+    "@types/eslint": "^8.2.1",
     "@types/mocha": "7.0.2",
     "@types/node": "^13.13.5",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "@typescript-eslint/typescript-estree": "^5.7.0",
     "docs-ts": "^0.4.0",
-    "eslint": "^6.8.0",
-    "eslint-config-werk85": "https://github.com/werk85/eslint-config-werk85.git",
+    "eslint": "^8.5.0",
     "fp-ts": "^2.5.4",
     "ix": "^3.0.2",
     "jest": "^26.0.1",
     "mocha": "^7.1.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
     "ts-jest": "^25.5.0",
     "ts-node": "8.10.1",
     "typescript": "^3.8.3"
@@ -56,5 +61,8 @@
     "fp-ts",
     "ixjs",
     "ix"
-  ]
+  ],
+  "dependencies": {
+    "eslint-plugin-fp-ts": "^0.3.0"
+  }
 }

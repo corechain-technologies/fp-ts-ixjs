@@ -1,7 +1,7 @@
 import * as assert from 'assert'
-import * as O from 'fp-ts/lib/Option'
-import * as E from 'fp-ts/lib/Either'
-import { identity } from 'fp-ts/lib/function'
+import * as O from 'fp-ts/Option'
+import * as E from 'fp-ts/Either'
+import { identity } from 'fp-ts/function'
 import { toArray, from } from 'ix/iterable'
 import { iterable as R } from '../src'
 

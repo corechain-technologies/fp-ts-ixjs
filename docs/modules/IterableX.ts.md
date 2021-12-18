@@ -58,7 +58,7 @@ Added in v0.0.1
 **Signature**
 
 ```ts
-export declare const alt: <A>(that: () => IterableX<A>) => (fa: IterableX<A>) => IterableX<A>
+export declare const alt: <A>(that: Lazy<IterableX<A>>) => (fa: IterableX<A>) => IterableX<A>
 ```
 
 Added in v0.0.1
@@ -161,7 +161,7 @@ Added in v0.0.1
 **Signature**
 
 ```ts
-export declare function getMonoid<A = never>(): Monoid<IterableX<A>>
+export declare function getMonoid<A = never>(): monoid.Monoid<IterableX<A>>
 ```
 
 Added in v0.0.1
@@ -171,7 +171,9 @@ Added in v0.0.1
 **Signature**
 
 ```ts
-export declare const iterable: Monad1<'IterableX'> & Alternative1<'IterableX'> & Filterable1<'IterableX'>
+export declare const iterable: monad.Monad1<'IterableX'> &
+  alternative.Alternative1<'IterableX'> &
+  filterable.Filterable1<'IterableX'>
 ```
 
 Added in v0.0.1
